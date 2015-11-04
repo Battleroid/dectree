@@ -39,3 +39,9 @@ Options:
     -e EXCEPT --except EXCEPT  Columns to exclude (comma delimited).
     -o OUT --output OUT  Filename for graphviz output (no extension).
 ```
+
+## references
+
+This [post][chris] by Chris Strelioff helped me greatly.
+
+[chris]: http://chrisstrelioff.ws/sandbox/2015/06/08/decision_trees_in_python_with_scikit_learn_and_pandas.html
