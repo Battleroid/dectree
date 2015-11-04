@@ -39,7 +39,12 @@ def do_splits(args):
         print('Class attribute ("{}") not present in data!'.format(class_attr))
         sys.exit(1)
 
-    # split up by unique values and get smallest group
+    # check percentage
+    if sample_size > 1.0 or sample_size <= 0:
+        print('Sample size is not a proper percentage, 0 < x <= 1!')
+        sys.exit(1)
+
+    # split up by unique values
     all_groups = [group(n, g, len(g)) for n, g in df.groupby([class_attr])]
 
     # verbose detail
@@ -47,7 +52,7 @@ def do_splits(args):
         print '-- Preliminary'
         print '{} total groups'.format(len(all_groups))
 
-    # build training set from sample percentage size
+    # build training and testing set from sample percentage size
     testing_groups = []
     training_groups_preprocess = []
     for g in all_groups:
