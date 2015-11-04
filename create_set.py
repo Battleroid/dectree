@@ -8,13 +8,13 @@ Options:
     -k --keep-all  Keep remainders when sampling.
 """
 
+
 from collections import namedtuple
 from docopt import docopt
 import pandas as pd
 import random
 import sys
 import math
-
 
 
 def do_splits(args):
@@ -81,14 +81,13 @@ def do_splits(args):
     else:
         training_groups = training_groups_preprocess
 
-    # combine
+    # combine both sets
     testing_df = pd.concat([x.df for x in testing_groups])
     training_df = pd.concat([x.df for x in training_groups])
 
-    # save
-    # testing_df.sort_values(['Ri']).to_csv('testing.csv', index=False)
-    # training_df.sort_values(['Ri']).to_csv('training.csv', index=False)
+    # save sorted by index (but do not include it)
     testing_df.sort_index().to_csv('testing.csv', index=False)
+    training_df.sort_index().to_csv('training.csv', index=False)
 
 
 if __name__ == '__main__':
