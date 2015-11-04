@@ -1,4 +1,7 @@
-"""
+"""Create training and testing data sets from a parent set of data given a 
+percentage to use for grabbing observations, or with the option to include all
+remaining observations for training sets.
+
 Usage:
      create_set.py <input> <amount> <class> [options]
 
