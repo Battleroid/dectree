@@ -40,15 +40,22 @@ def create_tree(args):
     if args['--except']:
         exceptions = args['--except'].split(',')
     samples = int(args['--samples'])
-    
+
     # get numeric columns and drop class and exceptions (our features)
     features = df._get_numeric_data().columns.difference([class_attr])
     if exceptions:
+        if verbose:
+            print('Removing the following: {}'.format(', '.join(exceptions)))
+
         features = features.difference(exceptions)
+
+    # verbose detail
+    if verbose:
+        print('Using the following features: {}'.format(', '.join(features)))
 
     # create tree
     dt = DecisionTreeClassifier(
-            min_samples_split=samples, 
+            min_samples_split=samples,
             criterion='entropy',
             splitter='best',
             random_state=99)
@@ -59,6 +66,8 @@ def create_tree(args):
     # export graph of tree if graph output specified
     if output:
         import subprocess
+        if verbose:
+            print('Saving as {0}.dot and {0}.png'.format(output))
 
         # save dot
         with open(output + '.dot', 'w') as f:
@@ -70,7 +79,6 @@ def create_tree(args):
         except:
             print('Problem creating graphviz image, is graphviz installed?')
             sys.exit(1)
-
 
 
 if __name__ == '__main__':
